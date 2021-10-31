@@ -3,8 +3,10 @@
  */
 package com.maquina.maquina.app.controllers;
 
+import com.maquina.maquina.app.entities.ContadorClientes;
 import com.maquina.maquina.app.entities.Machine;
 import com.maquina.maquina.app.entities.Reservation;
+import com.maquina.maquina.app.entities.StatusReservas;
 import com.maquina.maquina.app.services.MachineService;
 import com.maquina.maquina.app.services.ReservationService;
 import java.util.List;
@@ -74,6 +76,23 @@ public class ReservationController {
     public boolean delete(@PathVariable("id") int reservationId) {
         return service.deleteReservation(reservationId);
     }
+    
+    
+    @GetMapping("/report-status")
+    public StatusReservas getReservas(){
+        return service.reporteStatusServicio();
+    }
+    
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+     public List<Reservation> getReservasTiempo (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
+         return service.reporteTiempoServicio(dateOne, dateTwo);
+     }
+     
+     @GetMapping("/report-clients")
+     public List<ContadorClientes> getClientes(){
+         return service.reporteClientesServicio();
+     }
+
     
     
 }
